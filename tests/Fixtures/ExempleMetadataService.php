@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Sylarele\ObjectMetadataMapper\Tests\Fixtures;
 
+use InvalidArgumentException;
 use Sylarele\ObjectMetadataMapper\MetadataService;
 use Sylarele\ObjectMetadataMapper\Tests\Fixtures\Enums\ExampleType;
 use Sylarele\ObjectMetadataMapper\Tests\Fixtures\Objects\BarObject;
@@ -15,7 +16,7 @@ class ExempleMetadataService extends MetadataService
     {
         return match ($keyTemplate) {
             ExampleType::Foo => BarObject::class,
-            default => throw new \InvalidArgumentException(),
+            default => throw new InvalidArgumentException(),
         };
     }
 }

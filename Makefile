@@ -49,38 +49,36 @@ clear-phpstan:  ## Vide les caches et relance phpstan
 #                            |___/
 
 .PHONY: phpstan
-phpstan:  ## Lance l'analyse de code
+phpstan:  ## Lance l'analyse statique de code
 	$(call printSection,PHPSTAN)
 	${BIN_DIR}/phpstan.phar analyse -c phpstan.neon.dist --memory-limit=1G
 
 .PHONY: rector
 rector: ## Lance l'analyse de la refactorisation de la base de code
-	$(call printSection,RECTOR)
+	$(call printSection,RECTOR DRY RUN)
 	${BIN_DIR}/rector process --dry-run
 
 .PHONY: rector-process
 rector-process: ## Lance la refactorisation de la base de code
-	$(call printSection,RECTOR)
+	$(call printSection,RECTOR PROCESS)
 	${BIN_DIR}/rector process
 
 .PHONY: fix
 fix:  ## Lance le formatage du code
-	$(call printSection,DUSTER)
+	$(call printSection,PHP-CS-FIXER)
 	${BIN_DIR}/php-cs-fixer fix
 
 .PHONY: dependencies
 dependencies: ## Check if the dependency are compliant
 	$(call printSection,COMPOSER DEPENDENCY)
-	${BIN_DIR}/composer-dependency-analyser \
-		--ignore-shadow-deps \
-		--ignore-unused-deps
-
-.PHONY: migrate-fresh
-migrate-fresh:  ## Lance le formatage du code
-	$(call printSection,Migrate fresh)
-	${BIN_DIR}/testbench migrate:fresh
+	${BIN_DIR}/composer-dependency-analyser
 
 .PHONY: test
-test:  ## Lance le formatage du code
-	$(call printSection,DUSTER)
+test:  ## Lance les tests
+	$(call printSection,PHPUNIT)
 	${BIN_DIR}/phpunit
+
+.PHONY: ci-lint
+ci-lint: ## Lance l'analyse du formatage du code
+	$(call printSection,PHP-CS-FIXER DRY RUN)
+	${BIN_DIR}/php-cs-fixer fix --dry-run

@@ -42,9 +42,6 @@ final readonly class ObjectEachMapper extends Mapper
         return Arr::prependKeysWith($descriptions, $this->key.'.');
     }
 
-    /**
-     * @return array
-     */
     public function fake(): array
     {
         $result = [];

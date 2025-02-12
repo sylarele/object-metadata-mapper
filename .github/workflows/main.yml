@@ -33,6 +33,8 @@ jobs:
         uses: ./.github/actions/setup-php-composer
       - name: Dependencies tests
         run: make dependencies
+      - name: Code formatting
+        run: make ci-lint
       - name: Static analysis
         run: php ./vendor/bin/phpstan analyse --memory-limit=3G --error-format=github
       - name: Refactoring

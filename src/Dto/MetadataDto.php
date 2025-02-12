@@ -4,15 +4,19 @@ declare(strict_types=1);
 
 namespace Sylarele\ObjectMetadataMapper\Dto;
 
-use UnitEnum;
+use BackedEnum;
 
+/**
+ * @template TEnum of BackedEnum
+ */
 final readonly class MetadataDto
 {
     /**
+     * @param TEnum $template
      * @param array<string, string> $description
      */
     public function __construct(
-        public UnitEnum $template,
+        public BackedEnum $template,
         public array $description,
         public array $fake,
     ) {

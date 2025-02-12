@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Sylarele\ObjectMetadataMapper\Builders;
 
+use BackedEnum;
 use Sylarele\ObjectMetadataMapper\Attributes\Mapper;
 use Sylarele\ObjectMetadataMapper\Contracts\MapperInterface;
 use Sylarele\ObjectMetadataMapper\Dto\MetadataDto;
-use UnitEnum;
 
 /**
+ * @template TEnum of BackedEnum
  * @phpstan-import-type DescriptionType from MapperInterface
  */
 final class MetadataBuilder
@@ -19,7 +20,11 @@ final class MetadataBuilder
 
     private array $fake = [];
 
-    public function toDescriptionMailDto(UnitEnum $mailTemplate): MetadataDto
+    /**
+     * @param TEnum $mailTemplate
+     * @return MetadataDto<TEnum>
+     */
+    public function toDescriptionMailDto(BackedEnum $mailTemplate): MetadataDto
     {
         return new MetadataDto(
             $mailTemplate,

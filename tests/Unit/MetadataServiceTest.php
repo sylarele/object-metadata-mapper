@@ -35,13 +35,13 @@ class MetadataServiceTest extends TestCase
         );
         $this->assertEquals(
             [
-                'user' => [
+                'user' => (object) [
                     'fullname' => 'John Smith',
                     'phone' => '04 00 00 00 00',
                     'email' => 'fake@example.fr',
                     'addresses' => [
-                        ['address' => 'Av. Gustave Eiffel, 75007 Paris'],
-                        ['address' => 'Av. Gustave Eiffel, 75007 Paris'],
+                        (object) ['address' => 'Av. Gustave Eiffel, 75007 Paris'],
+                        (object) ['address' => 'Av. Gustave Eiffel, 75007 Paris'],
                     ],
                 ],
             ],

@@ -6,8 +6,8 @@
         "php": "^8.3"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.65",
-        "phpstan/phpstan": "^2.0",
+        "friendsofphp/php-cs-fixer": "^3.72",
+        "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^11.5",
         "rector/rector": "^2.0",
         "shipmonk/composer-dependency-analyser": "^1.8"

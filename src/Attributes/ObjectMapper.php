@@ -6,6 +6,7 @@ namespace Sylarele\ObjectMetadataMapper\Attributes;
 
 use Attribute;
 use Override;
+use stdClass;
 use Sylarele\ObjectMetadataMapper\Helpers\Arr;
 
 #[Attribute(Attribute::TARGET_CLASS | Attribute::IS_REPEATABLE)]
@@ -38,7 +39,7 @@ readonly class ObjectMapper extends Mapper
             : Arr::prependKeysWith($descriptions, $this->key.'.');
     }
 
-    public function fake(): array
+    public function fake(): stdClass
     {
         $fake = [];
 
@@ -46,6 +47,6 @@ readonly class ObjectMapper extends Mapper
             $fake[$mapper->key] = $mapper->fake();
         }
 
-        return $fake;
+        return (object) $fake;
     }
 }

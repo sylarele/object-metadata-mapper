@@ -9,7 +9,7 @@ use Override;
 use Sylarele\ObjectMetadataMapper\Helpers\Arr;
 
 #[Attribute(Attribute::TARGET_CLASS | Attribute::IS_REPEATABLE)]
-final readonly class ObjectEachMapper extends Mapper
+final readonly class ArrayEachMapper extends Mapper
 {
     /** @var array<Mapper> */
     public array $mappers;
@@ -47,12 +47,9 @@ final readonly class ObjectEachMapper extends Mapper
         $result = [];
 
         for ($i = 0; $i < $this->count; $i++) {
-            $fake = [];
             foreach ($this->mappers as $mapper) {
-                $fake[$mapper->key] = $mapper->fake();
+                $result[$i][$mapper->key] = $mapper->fake();
             }
-
-            $result[$i] = (object) $fake;
         }
 
         return $result;

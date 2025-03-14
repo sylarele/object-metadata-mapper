@@ -11,19 +11,23 @@ use BackedEnum;
 final readonly class EnumValueMapper extends Mapper
 {
     /**
-     * @param class-string<BackedEnum> $enum
+     * @template T of BackedEnum
+     *
+     * @param class-string<T> $enum
+     * @param T|null $default
      */
     public function __construct(
         string $key,
         public string $enum,
         ?string $description = null,
+        public BackedEnum|null $default = null,
     ) {
         parent::__construct($key, $this->generateDescription($description));
     }
 
     public function fake(): int|string
     {
-        return $this->enum::cases()[0]->value;
+        return $this->default->value ?? $this->enum::cases()[0]->value;
     }
 
     private function generateDescription(?string $description): string

@@ -23,7 +23,7 @@ class MetadataServiceTest extends TestCase
             ->service
             ->findByKey(ExampleType::Foo);
 
-        $this->assertEquals(
+        self::assertEquals(
             [
                 'user.fullname' => 'nom et prénom d\'utilisateur',
                 'user.phone' => 'numéro de téléphone',
@@ -33,7 +33,7 @@ class MetadataServiceTest extends TestCase
             ],
             $metadataDto->description,
         );
-        $this->assertEquals(
+        self::assertEquals(
             [
                 'user' => (object) [
                     'fullname' => 'John Smith',

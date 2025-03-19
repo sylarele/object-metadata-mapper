@@ -39,6 +39,7 @@ abstract class MetadataService
     }
 
     /**
+     * @param TEnum $keyTemplate
      * @return class-string
      */
     abstract protected function getClassName(BackedEnum $keyTemplate): string;

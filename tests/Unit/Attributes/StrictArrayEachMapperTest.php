@@ -6,18 +6,19 @@ namespace Sylarele\ObjectMetadataMapper\Tests\Unit\Attributes;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use Sylarele\ObjectMetadataMapper\Attributes\StrictArrayEachMapper;
 use Sylarele\ObjectMetadataMapper\Attributes\StrictArrayMapper;
 
 #[CoversClass(StrictArrayMapper::class)]
 class StrictArrayEachMapperTest extends TestCase
 {
-    private StrictArrayMapper $mapper;
+    private StrictArrayEachMapper $mapper;
 
     protected function setUp(): void
     {
-        $this->mapper = new StrictArrayMapper(
+        $this->mapper = new StrictArrayEachMapper(
             'example',
-            'my example description',
+            2,
             [
                 'title' => 'Lorem ipsum',
             ]
@@ -27,8 +28,14 @@ class StrictArrayEachMapperTest extends TestCase
     public function testFake(): void
     {
         $fake = $this->mapper->fake();
-
-        self::assertEquals('Lorem ipsum', $fake['title']);
+        self::assertCount(2, $fake);
+        self::assertSame(
+            [
+                'example.0.title' => 'Lorem ipsum',
+                'example.1.title' => 'Lorem ipsum',
+            ],
+            $fake
+        );
     }
 
     public function testDescription(): void
@@ -36,7 +43,10 @@ class StrictArrayEachMapperTest extends TestCase
         $description = $this->mapper->descriptions();
 
         self::assertEquals(
-            ['example' => 'my example description'],
+            [
+                'example.0.title' => '',
+                'example.1.title' => '',
+            ],
             $description
         );
     }

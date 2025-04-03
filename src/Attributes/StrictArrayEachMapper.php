@@ -6,21 +6,19 @@ namespace Sylarele\ObjectMetadataMapper\Attributes;
 
 use Attribute;
 use Override;
-use Sylarele\ObjectMetadataMapper\Helpers\Arr;
 
 #[Attribute(Attribute::TARGET_CLASS | Attribute::IS_REPEATABLE)]
 final readonly class StrictArrayEachMapper extends Mapper
 {
-    /** @var array<Mapper> */
-    public array $mappers;
-
+    /**
+     * @param array<string, scalar|null> $default
+     */
     public function __construct(
         string $key,
         public int $count = 3,
-        Mapper ...$mappers
+        public array $default = []
     ) {
         parent::__construct($key, '');
-        $this->mappers = $mappers;
     }
 
     #[Override]
@@ -29,26 +27,25 @@ final readonly class StrictArrayEachMapper extends Mapper
         $descriptions = [];
 
         for ($i = 0; $i < $this->count; $i++) {
-            foreach ($this->mappers as $mapper) {
-                if ($mapper instanceof ObjectEachMapper || $mapper instanceof ObjectMapper) {
-                    $descriptions = array_merge($descriptions, $mapper->descriptions());
-                } else {
-                    $descriptions[$i.'.'.$mapper->key] = $mapper->description;
-                }
+            foreach (array_keys($this->default) as $key) {
+                $descriptions[$this->key . '.' . $i . '.' . $key] = '';
             }
         }
 
 
-        return Arr::prependKeysWith($descriptions, $this->key.'.');
+        return $descriptions;
     }
 
+    /**
+     * @return array<string, scalar|null>
+     */
     public function fake(): array
     {
         $result = [];
 
         for ($i = 0; $i < $this->count; $i++) {
-            foreach ($this->mappers as $mapper) {
-                $result[$i][$mapper->key] = $mapper->fake();
+            foreach ($this->default as $key => $mapper) {
+                $result[$this->key . '.' . $i . '.' . $key] = $mapper;
             }
         }
 

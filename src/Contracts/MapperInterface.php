@@ -11,6 +11,9 @@ use stdClass;
  */
 interface MapperInterface
 {
+    /**
+     * @return array<array, mixed>|bool|int|string|stdClass|null
+     */
     public function fake(): null|array|bool|int|string|stdClass;
 
     /**

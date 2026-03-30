@@ -18,13 +18,14 @@ final class MetadataBuilder
     /** @var DescriptionType */
     private array $description = [];
 
+    /** @var array<array, mixed> */
     private array $fake = [];
 
     /**
      * @param TEnum $mailTemplate
      * @return MetadataDto<TEnum>
      */
-    public function toDescriptionMailDto(BackedEnum $mailTemplate): MetadataDto
+    public function getMetadataDto(BackedEnum $mailTemplate): MetadataDto
     {
         return new MetadataDto(
             $mailTemplate,

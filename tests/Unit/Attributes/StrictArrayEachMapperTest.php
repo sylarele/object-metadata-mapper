@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 use Sylarele\ObjectMetadataMapper\Attributes\StrictArrayMapper;
 
 #[CoversClass(StrictArrayMapper::class)]
-class StrictArrayEachMapperTest extends TestCase
+final class StrictArrayEachMapperTest extends TestCase
 {
     private StrictArrayMapper $mapper;
 
@@ -35,9 +35,6 @@ class StrictArrayEachMapperTest extends TestCase
     {
         $description = $this->mapper->descriptions();
 
-        self::assertEquals(
-            ['example' => 'my example description'],
-            $description
-        );
+        self::assertSame(['example' => 'my example description'], $description);
     }
 }

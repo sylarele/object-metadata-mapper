@@ -1,19 +1,19 @@
 includes:
-    - ./vendor/phpstan/phpstan-strict-rules/rules.neon
-    - ./vendor/phpstan/phpstan-phpunit/extension.neon
+    - phar://vendor/phpstan/phpstan/phpstan.phar/conf/bleedingEdge.neon
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor/phpstan/phpstan-phpunit/rules.neon
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
 
 parameters:
     level: max
-    treatPhpDocTypesAsCertain: false
 
     parallel:
-       maximumNumberOfProcesses: 4
-
-    tmpDir: storage/tmp/phpstan
+       maximumNumberOfProcesses: 6
 
     paths:
         - src
         - tests
 
-    ignoreErrors:
-        - identifier: missingType.iterableValue
+    tmpDir: storage/tmp/phpstan
+
+    treatPhpDocTypesAsCertain: false

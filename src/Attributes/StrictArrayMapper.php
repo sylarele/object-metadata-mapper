@@ -11,6 +11,8 @@ final readonly class StrictArrayMapper extends Mapper
 {
     /**
      * Use only for simple arrays.
+     *
+     * @param array<string, mixed> $default
      */
     public function __construct(
         string $key,

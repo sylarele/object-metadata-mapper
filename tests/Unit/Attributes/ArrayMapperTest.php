@@ -10,7 +10,7 @@ use Sylarele\ObjectMetadataMapper\Attributes\ArrayMapper;
 use Sylarele\ObjectMetadataMapper\Attributes\StringMapper;
 
 #[CoversClass(ArrayMapper::class)]
-class ArrayMapperTest extends TestCase
+final class ArrayMapperTest extends TestCase
 {
     private ArrayMapper $mapper;
 
@@ -33,9 +33,6 @@ class ArrayMapperTest extends TestCase
     {
         $description = $this->mapper->descriptions();
 
-        self::assertEquals(
-            ['example.title' => 'my title description'],
-            $description
-        );
+        self::assertSame(['example.title' => 'my title description'], $description);
     }
 }

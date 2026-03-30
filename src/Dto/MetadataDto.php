@@ -14,6 +14,7 @@ final readonly class MetadataDto
     /**
      * @param TEnum $template
      * @param array<string, string> $description
+     * @param array<array, mixed> $fake
      */
     public function __construct(
         public BackedEnum $template,

@@ -38,7 +38,6 @@ final readonly class ArrayEachMapper extends Mapper
             }
         }
 
-
         return Arr::prependKeysWith($descriptions, $this->key.'.');
     }
 

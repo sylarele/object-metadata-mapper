@@ -9,6 +9,9 @@ use PHPUnit\Framework\TestCase;
 use Sylarele\ObjectMetadataMapper\Attributes\ArrayMapper;
 use Sylarele\ObjectMetadataMapper\Attributes\StrictArrayMapper;
 
+/**
+ * @internal
+ */
 #[CoversClass(ArrayMapper::class)]
 final class StrictArrayMapperTest extends TestCase
 {

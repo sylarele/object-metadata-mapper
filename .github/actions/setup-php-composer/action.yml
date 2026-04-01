@@ -2,6 +2,11 @@ name: setup php
 
 description: "Setup the php composer env"
 
+inputs:
+  php-version:
+    required: true
+    description: 'PHP version to use'
+
 runs:
   using: composite
   steps:
@@ -11,12 +16,12 @@ runs:
       env:
         cache-name-php: cache-composer
       with:
-        # caching composer
         path: vendor
-        key: ${{ runner.os }}-build-${{ env.cache-name-php }}-${{hashFiles('**/composer.lock') }}
+        key: ${{ runner.os }}-php-${{ inputs.php-version }}-build-${{ env.cache-name-php }}-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name-php }}-
-          ${{ runner.os }}-build-
+          ${{ runner.os }}-php-${{ inputs.php-version }}-build-${{ env.cache-name-php }}-
+          ${{ runner.os }}-php-${{ inputs.php-version }}-build-
+          ${{ runner.os }}-php-${{ inputs.php-version }}-
           ${{ runner.os }}-
 
     - name: Install php dependencies

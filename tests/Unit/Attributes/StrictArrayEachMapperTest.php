@@ -8,6 +8,9 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Sylarele\ObjectMetadataMapper\Attributes\StrictArrayMapper;
 
+/**
+ * @internal
+ */
 #[CoversClass(StrictArrayMapper::class)]
 final class StrictArrayEachMapperTest extends TestCase
 {

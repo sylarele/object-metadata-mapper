@@ -29,6 +29,12 @@ jobs:
 
       - name: Install dependencies with Composer
         uses: ./.github/actions/setup-php-composer
+        with:
+          php-version: ${{ matrix.php-version }}
+
+      - name: check PSR compliance
+        if: matrix.php-version == env.LATEST_PHP_VERSION
+        run: ./.github/script/check-psr.sh
 
       - name: Dependencies tests
         if: matrix.php-version == env.LATEST_PHP_VERSION

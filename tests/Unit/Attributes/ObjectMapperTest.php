@@ -9,6 +9,9 @@ use PHPUnit\Framework\TestCase;
 use Sylarele\ObjectMetadataMapper\Attributes\ObjectMapper;
 use Sylarele\ObjectMetadataMapper\Attributes\StringMapper;
 
+/**
+ * @internal
+ */
 #[CoversClass(ObjectMapper::class)]
 final class ObjectMapperTest extends TestCase
 {

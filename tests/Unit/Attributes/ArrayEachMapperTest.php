@@ -9,6 +9,9 @@ use PHPUnit\Framework\TestCase;
 use Sylarele\ObjectMetadataMapper\Attributes\ArrayEachMapper;
 use Sylarele\ObjectMetadataMapper\Attributes\StringMapper;
 
+/**
+ * @internal
+ */
 #[CoversClass(ArrayEachMapper::class)]
 final class ArrayEachMapperTest extends TestCase
 {
@@ -28,6 +31,7 @@ final class ArrayEachMapperTest extends TestCase
         $fake = $this->mapper->fake();
 
         self::assertCount(2, $fake);
+
         foreach ($fake as $value) {
             self::assertIsArray($value);
             self::assertSame('Lorem ipsum', $value['title']);

@@ -10,6 +10,9 @@ use stdClass;
 use Sylarele\ObjectMetadataMapper\Attributes\ObjectEachMapper;
 use Sylarele\ObjectMetadataMapper\Attributes\StringMapper;
 
+/**
+ * @internal
+ */
 #[CoversClass(ObjectEachMapper::class)]
 final class ObjectEachMapperTest extends TestCase
 {
@@ -29,6 +32,7 @@ final class ObjectEachMapperTest extends TestCase
         $fake = $this->mapper->fake();
 
         self::assertCount(2, $fake);
+
         foreach ($fake as $value) {
             self::assertInstanceOf(stdClass::class, $value);
             self::assertSame('Lorem ipsum', $value->title);

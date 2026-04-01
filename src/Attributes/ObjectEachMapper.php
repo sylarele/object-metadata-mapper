@@ -38,7 +38,6 @@ final readonly class ObjectEachMapper extends Mapper
             }
         }
 
-
         return Arr::prependKeysWith($descriptions, $this->key.'.');
     }
 
@@ -48,6 +47,7 @@ final readonly class ObjectEachMapper extends Mapper
 
         for ($i = 0; $i < $this->count; $i++) {
             $fake = [];
+
             foreach ($this->mappers as $mapper) {
                 $fake[$mapper->key] = $mapper->fake();
             }

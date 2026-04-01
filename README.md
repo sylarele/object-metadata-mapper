@@ -125,4 +125,3 @@ $dto->description;
 | `StrictArrayEachMapper` | Strict array with N occurrences           |
 | `ObjectMapper`          | Object composed of sub-mappers            |
 | `ObjectEachMapper`      | Array of N composed objects               |
-

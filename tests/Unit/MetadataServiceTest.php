@@ -4,10 +4,16 @@ declare(strict_types=1);
 
 namespace Sylarele\ObjectMetadataMapper\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use Sylarele\ObjectMetadataMapper\MetadataService;
 use Sylarele\ObjectMetadataMapper\Tests\Fixtures\Enums\ExampleType;
 use Sylarele\ObjectMetadataMapper\Tests\Fixtures\ExempleMetadataService;
 
+/**
+ * @internal
+ */
+#[CoversClass(MetadataService::class)]
 final class MetadataServiceTest extends TestCase
 {
     private ExempleMetadataService $service;

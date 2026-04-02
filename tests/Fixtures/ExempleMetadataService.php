@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Sylarele\ObjectMetadataMapper\Tests\Fixtures;
 
 use BackedEnum;
-use InvalidArgumentException;
 use Sylarele\ObjectMetadataMapper\MetadataService;
 use Sylarele\ObjectMetadataMapper\Tests\Fixtures\Enums\ExampleType;
 use Sylarele\ObjectMetadataMapper\Tests\Fixtures\Objects\BarObject;

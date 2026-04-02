@@ -1,25 +1,29 @@
 name: setup php
+
 description: "Setup the php composer env"
+
+inputs:
+  php-version:
+    required: true
+    description: 'PHP version to use'
+
 runs:
   using: composite
   steps:
-    - name: Setup PHP Action
-      uses: shivammathur/setup-php@2.31.1
-      with:
-        php-version: '8.3'
     - name: Cache php composer
       id: cache-composer
-      uses: actions/cache@v4
+      uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
       env:
         cache-name-php: cache-composer
       with:
-        # caching composer
         path: vendor
-        key: ${{ runner.os }}-build-${{ env.cache-name-php }}-${{hashFiles('**/composer.lock') }}
+        key: ${{ runner.os }}-php-${{ inputs.php-version }}-build-${{ env.cache-name-php }}-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name-php }}-
-          ${{ runner.os }}-build-
+          ${{ runner.os }}-php-${{ inputs.php-version }}-build-${{ env.cache-name-php }}-
+          ${{ runner.os }}-php-${{ inputs.php-version }}-build-
+          ${{ runner.os }}-php-${{ inputs.php-version }}-
           ${{ runner.os }}-
+
     - name: Install php dependencies
       if: steps.cache-composer.outputs.cache-hit != 'true'
       shell: bash

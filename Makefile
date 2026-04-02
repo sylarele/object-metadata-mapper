@@ -9,6 +9,9 @@ define printSection
 	@printf "\033[36m\n==================================================\n\033[0m"
 endef
 
+.PHONY: all ## Run all checks
+all: fix phpstan rector dependencies archi test
+
 #  _   _      _
 # | | | |    | |
 # | |_| | ___| |_ __
@@ -19,7 +22,7 @@ endef
 #              |_|
 
 .PHONY: help
-help: ## Liste les commandes présentes
+help: ## List available commands
 	$(call printSection,HELP)
 	@grep -E '(^[a-zA-Z_-]+:.*?##.*$$)|(^##)' $(MAKEFILE_LIST) \
 	| sort \
@@ -33,11 +36,10 @@ help: ## Liste les commandes présentes
 # | \__/\ (_| | (__| | | |  __/
 # \____/\__,_|\___|_| |_|\___|
 
-.PHONY: clear-phpstan
-clear-phpstan:  ## Vide les caches et relance phpstan
-	$(call printSection,CLEAR CACHE PHPSTAN)
-	rm -R ${SOURCE_DIR}/storage/tmp/phpstan
-	make phpstan
+.PHONY: clear-cache
+clear-cache: ## Clear caches
+	$(call printSection,CLEAR CACHE)
+	rm -R ${SOURCE_DIR}/storage/tmp
 
 #  _____             _ _ _
 # |  _  |           | (_) |
@@ -49,23 +51,28 @@ clear-phpstan:  ## Vide les caches et relance phpstan
 #                            |___/
 
 .PHONY: phpstan
-phpstan:  ## Lance l'analyse statique de code
+phpstan: ## Run code analysis
 	$(call printSection,PHPSTAN)
 	${BIN_DIR}/phpstan.phar analyse -c phpstan.neon.dist --memory-limit=1G
 
 .PHONY: rector
-rector: ## Lance l'analyse de la refactorisation de la base de code
+rector: ## Run code base refactoring analysis
 	$(call printSection,RECTOR DRY RUN)
 	${BIN_DIR}/rector process --dry-run
 
 .PHONY: rector-process
-rector-process: ## Lance la refactorisation de la base de code
+rector-process: ## Run code base refactoring
 	$(call printSection,RECTOR PROCESS)
 	${BIN_DIR}/rector process
 
 .PHONY: fix
-fix:  ## Lance le formatage du code
+fix: ## Run the code formatting analysis
 	$(call printSection,PHP-CS-FIXER)
+	${BIN_DIR}/php-cs-fixer fix --dry-run
+
+.PHONY: fix-process
+fix-process: ## Run code formatting
+	$(call printSection,PHP-CS-FIXER DRY RUN)
 	${BIN_DIR}/php-cs-fixer fix
 
 .PHONY: dependencies
@@ -73,12 +80,19 @@ dependencies: ## Check if the dependency are compliant
 	$(call printSection,COMPOSER DEPENDENCY)
 	${BIN_DIR}/composer-dependency-analyser
 
-.PHONY: test
-test:  ## Lance les tests
-	$(call printSection,PHPUNIT)
-	${BIN_DIR}/phpunit
+#  _____         _
+# |_   _|       | |
+#   | | ___  ___| |_
+#   | |/ _ \/ __| __|
+#   | |  __/\__ \ |_
+#   \_/\___||___/\__|
 
-.PHONY: ci-lint
-ci-lint: ## Lance l'analyse du formatage du code
-	$(call printSection,PHP-CS-FIXER DRY RUN)
-	${BIN_DIR}/php-cs-fixer fix --dry-run
+.PHONY: test
+test: ## Run unit and feature tests
+	$(call printSection,TEST PHPUNIT)
+	${BIN_DIR}/phpunit $(args)
+
+.PHONY: archi
+archi: ## Run archi tests
+	$(call printSection,TEST STRUCTURA)
+	${BIN_DIR}/structura $(args)

@@ -35,7 +35,7 @@ abstract class MetadataService
             $builder->addMapper($instance);
         }
 
-        return $builder->toDescriptionMailDto($keyTemplate);
+        return $builder->getMetadataDto($keyTemplate);
     }
 
     /**

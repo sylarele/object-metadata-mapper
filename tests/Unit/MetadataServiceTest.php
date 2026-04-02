@@ -4,11 +4,17 @@ declare(strict_types=1);
 
 namespace Sylarele\ObjectMetadataMapper\Tests\Unit;
 
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use Sylarele\ObjectMetadataMapper\MetadataService;
 use Sylarele\ObjectMetadataMapper\Tests\Fixtures\Enums\ExampleType;
 use Sylarele\ObjectMetadataMapper\Tests\Fixtures\ExempleMetadataService;
 
-class MetadataServiceTest extends TestCase
+/**
+ * @internal
+ */
+#[CoversClass(MetadataService::class)]
+final class MetadataServiceTest extends TestCase
 {
     private ExempleMetadataService $service;
 
@@ -23,29 +29,23 @@ class MetadataServiceTest extends TestCase
             ->service
             ->findByKey(ExampleType::Foo);
 
-        self::assertEquals(
-            [
-                'user.fullname' => 'nom et prénom d\'utilisateur',
-                'user.phone' => 'numéro de téléphone',
-                'user.email' => '',
-                'user.addresses.0.address' => '',
-                'user.addresses.1.address' => '',
-            ],
-            $metadataDto->description,
-        );
-        self::assertEquals(
-            [
-                'user' => (object) [
-                    'fullname' => 'John Smith',
-                    'phone' => '04 00 00 00 00',
-                    'email' => 'fake@example.fr',
-                    'addresses' => [
-                        (object) ['address' => 'Av. Gustave Eiffel, 75007 Paris'],
-                        (object) ['address' => 'Av. Gustave Eiffel, 75007 Paris'],
-                    ],
+        self::assertSame([
+            'user.fullname' => 'nom et prénom d\'utilisateur',
+            'user.phone' => 'numéro de téléphone',
+            'user.email' => '',
+            'user.addresses.0.address' => '',
+            'user.addresses.1.address' => '',
+        ], $metadataDto->description);
+        self::assertEquals([
+            'user' => (object) [
+                'fullname' => 'John Smith',
+                'phone' => '04 00 00 00 00',
+                'email' => 'fake@example.fr',
+                'addresses' => [
+                    (object) ['address' => 'Av. Gustave Eiffel, 75007 Paris'],
+                    (object) ['address' => 'Av. Gustave Eiffel, 75007 Paris'],
                 ],
             ],
-            $metadataDto->fake,
-        );
+        ], $metadataDto->fake);
     }
 }

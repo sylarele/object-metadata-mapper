@@ -11,7 +11,10 @@ use stdClass;
  */
 interface MapperInterface
 {
-    public function fake(): null|array|bool|int|string|stdClass;
+    /**
+     * @return array<array, mixed>|bool|int|stdClass|string|null
+     */
+    public function fake(): null|array|bool|int|stdClass|string;
 
     /**
      * @return DescriptionType

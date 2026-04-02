@@ -16,7 +16,7 @@ class Arr
     {
         return static::mapWithKeys(
             $array,
-            static fn ($item, string $key): array => [$prependWith . $key => $item]
+            static fn ($item, string $key): array => [$prependWith.$key => $item]
         );
     }
 

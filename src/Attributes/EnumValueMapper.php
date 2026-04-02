@@ -20,7 +20,7 @@ final readonly class EnumValueMapper extends Mapper
         string $key,
         public string $enum,
         ?string $description = null,
-        public BackedEnum|null $default = null,
+        public ?BackedEnum $default = null,
     ) {
         parent::__construct($key, $this->generateDescription($description));
     }

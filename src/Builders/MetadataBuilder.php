@@ -18,7 +18,7 @@ final class MetadataBuilder
     /** @var DescriptionType */
     private array $description = [];
 
-    /** @var array<array, mixed> */
+    /** @var array<array-key, mixed> */
     private array $fake = [];
 
     /**

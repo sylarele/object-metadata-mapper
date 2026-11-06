@@ -117,6 +117,7 @@ $dto->description;
 | `FullNameMapper`        | Full name                                 |
 | `AddressMapper`         | Postal address                            |
 | `AmountMapper`          | Numeric amount                            |
+| `EnumMapper`            | Enum instance                             |
 | `EnumValueMapper`       | Enum value                                |
 | `ReferenceMapper`       | Reference (UUID / ID)                     |
 | `ArrayMapper`           | Array of values                           |

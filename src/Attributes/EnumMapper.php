@@ -1,0 +1,47 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Sylarele\ObjectMetadataMapper\Attributes;
+
+use Attribute;
+use BackedEnum;
+
+#[Attribute(Attribute::TARGET_CLASS | Attribute::IS_REPEATABLE)]
+final readonly class EnumMapper extends Mapper
+{
+    /**
+     * @template T of BackedEnum
+     *
+     * @param class-string<T> $enum
+     * @param T|null $default
+     */
+    public function __construct(
+        string $key,
+        public string $enum,
+        ?string $description = null,
+        public ?BackedEnum $default = null,
+    ) {
+        parent::__construct($key, $this->generateDescription($description));
+    }
+
+    public function fake(): BackedEnum
+    {
+        return $this->default ?? $this->enum::cases()[0];
+    }
+
+    private function generateDescription(?string $description): string
+    {
+        if ($description === null) {
+            return implode(
+                ', ',
+                array_map(
+                    static fn (BackedEnum $value): string => \strval($value->value),
+                    $this->enum::cases(),
+                ),
+            );
+        }
+
+        return $description;
+    }
+}

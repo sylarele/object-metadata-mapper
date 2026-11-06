@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Sylarele\ObjectMetadataMapper\Contracts;
 
+use BackedEnum;
 use stdClass;
 
 /**
@@ -12,9 +13,9 @@ use stdClass;
 interface MapperInterface
 {
     /**
-     * @return array<array-key, mixed>|bool|int|stdClass|string|null
+     * @return array<array-key, mixed>|BackedEnum|bool|int|stdClass|string|null
      */
-    public function fake(): null|array|bool|int|stdClass|string;
+    public function fake(): null|array|BackedEnum|bool|int|stdClass|string;
 
     /**
      * @return DescriptionType

@@ -23,7 +23,7 @@ final class TestDto extends TestBuilder
                     ->toHaveSuffix('Dto')
                     ->toBeFinal()
                     ->toBeReadonly()
-                    ->toExtendsNothing()
+                    ->toExtendNothing()
                     ->toNotUseTrait()
                     ->toNotHavePublicConstant()
             );

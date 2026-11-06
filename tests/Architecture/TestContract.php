@@ -22,7 +22,7 @@ final class TestContract extends TestBuilder
             ->fromDir('src/Contracts')
             ->that(
                 static fn (Expr $expr): Expr => $expr
-                    ->notToBeInOneOfTheNamespaces(Mapper::class)
+                    ->toNotBeInNamespaces(Mapper::class)
             )
             ->except(
                 static fn (Except $except): Except => $except

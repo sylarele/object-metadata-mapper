@@ -23,7 +23,7 @@ final class TestAttribute extends TestBuilder
             ->fromDir('src/Attributes')
             ->that(
                 static fn (Expr $expr): Expr => $expr
-                    ->notToBeInOneOfTheNamespaces(Mapper::class)
+                    ->toNotBeInNamespaces(Mapper::class)
             )
             ->except(
                 static fn (Except $except): Except => $except
@@ -32,7 +32,7 @@ final class TestAttribute extends TestBuilder
             ->should(
                 static fn (Expr $expr): Expr => $expr
                     ->toUseStrictTypes()
-                    ->toBeAttribute(Attribute::TARGET_CLASS | Attribute::IS_REPEATABLE)
+                    ->toBeAttributes(Attribute::TARGET_CLASS | Attribute::IS_REPEATABLE)
                     ->toHaveSuffix('Mapper')
                     ->toBeFinal()
                     ->toBeReadonly()

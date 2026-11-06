@@ -30,7 +30,7 @@ final class MetadataServiceTest extends TestCase
             ->findByKey(ExampleType::Foo);
 
         self::assertSame([
-            'user.fullname' => 'nom et prénom d\'utilisateur',
+            'user.fullname' => "nom et prénom d'utilisateur",
             'user.phone' => 'numéro de téléphone',
             'user.email' => '',
             'user.addresses.0.address' => '',

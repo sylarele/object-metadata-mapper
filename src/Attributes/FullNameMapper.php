@@ -11,7 +11,7 @@ final readonly class FullNameMapper extends Mapper
 {
     public function __construct(
         string $key,
-        string $description = 'nom et prénom d\'utilisateur',
+        string $description = "nom et prénom d'utilisateur",
         public string $default = 'John Smith',
     ) {
         parent::__construct($key, $description);

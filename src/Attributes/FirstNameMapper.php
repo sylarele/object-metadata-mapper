@@ -11,7 +11,7 @@ final readonly class FirstNameMapper extends Mapper
 {
     public function __construct(
         string $key,
-        string $description = 'prénom d\'utilisateur',
+        string $description = "prénom d'utilisateur",
         public string $default = 'John',
     ) {
         parent::__construct($key, $description);
